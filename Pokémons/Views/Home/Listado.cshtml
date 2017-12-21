@@ -1,7 +1,44 @@
-﻿
+﻿@model IEnumerable<Pokémons.Models.Pokemon>
 @{
-    ViewBag.Title = "Listado";
+    ViewData["Title"] = "Listado";
 }
 
-<h2>Listado</h2>
+<h2>Listado de Pokémons</h2>
 
+<table class="table table-bordered table-hover table-responsive">
+    <thead>
+        <th>N°</th>
+        <th>Nombre</th>
+        <th>Tipo</th>
+        <th>Categoria</th>
+        <th>Descripcion</th>
+        <th>Altura</th>
+        <th>Peso</th>
+        <th>Sexo</th>
+        <th>Ataques</th>
+        <th>Habilidad</th>
+        <th>Debilidad</th>
+        <th>Evoluciones</th>
+        <th colspan="2">Action</th>
+    </thead>
+    <tbody>
+        @foreach (Pokémons.Models.Pokemon p in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(m => p.numero)</td>
+                <td>@Html.DisplayFor(m => p.nombre)</td>
+                <td>@Html.DisplayFor(m => p.tipo)</td>
+                <td>@Html.DisplayFor(m => p.categoria)</td>
+                <td>@Html.DisplayFor(m => p.descripcion)</td>
+                <td>@Html.DisplayFor(m => p.altura)</td>
+                <td>@Html.DisplayFor(m => p.peso)</td>
+                <td>@Html.DisplayFor(m => p.sexo)</td>
+                <td>@Html.DisplayFor(m => p.ataques)</td>
+                <td>@Html.DisplayFor(m => p.habilidad)</td>
+                <td>@Html.DisplayFor(m => p.debilidad)</td>
+                <td>@Html.DisplayFor(m => p.evoluciones)</td>
+                <td>@Html.ActionLink("Ver Ficha", "Ficha", new { numero = p.numero })</td>
+            </tr>
+        }
+    </tbody>
+</table>

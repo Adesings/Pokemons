@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PokemonsStoreContainer" CdmEntityContainer="PokemonsEntities">
+    <EntitySetMapping Name="Pokemon">
+      <EntityTypeMapping TypeName="Pokemons.Pokemon">
+        <MappingFragment StoreEntitySet="Pokemon">
+          <ScalarProperty Name="numero" ColumnName="numero" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="tipo" ColumnName="tipo" />
+          <ScalarProperty Name="categoria" ColumnName="categoria" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="altura" ColumnName="altura" />
+          <ScalarProperty Name="peso" ColumnName="peso" />
+          <ScalarProperty Name="sexo" ColumnName="sexo" />
+          <ScalarProperty Name="ataques" ColumnName="ataques" />
+          <ScalarProperty Name="habilidad" ColumnName="habilidad" />
+          <ScalarProperty Name="debilidad" ColumnName="debilidad" />
+          <ScalarProperty Name="evoluciones" ColumnName="evoluciones" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,7 +1,55 @@
-﻿
-@{
-    ViewBag.Title = "Ficha";
-}
+﻿@model Pokémons.Models.Pokemon
 
-<h2>Ficha</h2>
+<h2>Ficha de Pokémon</h2>
+
+<hr />
+
+<div class="dl-horizontal">
+    <label>N°:</label>
+    <span>@Model.numero</span>
+</div>
+<div class="dl-horizontal">
+    <label>Nombre:</label>
+    <span>@Model.nombre</span>
+</div>
+<div class="dl-horizontal">
+    <label>Tipo:</label>
+    <span>@Model.tipo</span>
+</div>
+<div class="dl-horizontal">
+    <label>Categoria:</label>
+    <span>@Model.categoria</span>
+</div>
+<div class="dl-horizontal">
+    <label>Descripción:</label>
+    <span>@Model.descripcion</span>
+</div>
+<div class="dl-horizontal">
+    <label>Altura:</label>
+    <span>@Model.altura</span>
+</div>
+<div class="dl-horizontal">
+    <label>Peso:</label>
+    <span>@Model.peso</span>
+</div>
+<div class="dl-horizontal">
+    <label>Sexo:</label>
+    <span>@Model.sexo</span>
+</div>
+<div class="dl-horizontal">
+    <label>Ataques:</label>
+    <span>@Model.ataques</span>
+</div>
+<div class="dl-horizontal">
+    <label>Habilidad:</label>
+    <span>@Model.habilidad</span>
+</div>
+<div class="dl-horizontal">
+    <label>Debilidad:</label>
+    <span>@Model.debilidad</span>
+</div>
+<div class="dl-horizontal">
+    <label>Evoluciones:</label>
+    <span>@Model.evoluciones</span>
+</div>
 

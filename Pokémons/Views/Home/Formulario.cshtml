@@ -1,8 +1,149 @@
 ﻿
-@{
-    ViewBag.Title = "Formulario";
-}
+<fieldset>
+    <legend> Ingreso de Pokémons</legend>
+    @using (@Html.BeginForm("Guardar", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+        <div class="form-group">
+            <span class="col-md-2">
+                N.°:
+            </span>
+            <span class="col-md-6">
+                @Html.TextBox("numero", null, new { @class = "form-control", placeholder = "" })
+            </span>
+        </div>
+        <div class="form-group">
+            <span class="col-md-2">
+                Nombre:
+            </span>
+            <span class="col-md-6">
+                @Html.TextBox("nombre", null, new { @class = "form-control", placeholder = "ingresa nombre de tu pokemon" })
+            </span>
+        </div>
+        <div class="form-group">
+            <span class="col-md-2">
+                Tipo:
+            </span>
+            <span class="col-md-6">
+                @Html.DropDownList("tipo", new List<SelectListItem>
+                    {
+                        new SelectListItem{Text="Hierba", Value="Hierba"},
+                        new SelectListItem{Text="Agua", Value="Agua"},
+                        new SelectListItem{Text="Fuego", Value="Fuego"},
+                        new SelectListItem{Text="Electrico", Value="Electrico"},
+                     // new SelectListItem{Text="Bicho", Value="Bicho"},
+                     // new SelectListItem{Text="Normal", Value="Normal"},
+                     // new SelectListItem{Text="Lucha", Value="Lucha"},
+                     // new SelectListItem{Text="Veneno", Value="Veneno"},
+                     // new SelectListItem{Text="Volador", Value="Volador"},
+                     // new SelectListItem{Text="Tierra", Value="Tierra"},
+                     // new SelectListItem{Text="Roca", Value="Roca"},
+                     // new SelectListItem{Text="Acero", Value="Acero"},
+                     // new SelectListItem{Text="Hielo", Value="Hielo"},
+                     // new SelectListItem{Text="Psiquico", Value="Psiquico"},
+                     // new SelectListItem{Text="Fantasma", Value="Fantasma"},
+                     // new SelectListItem{Text="Hada", Value="Hada"},
+                     // new SelectListItem{Text="Dragon", Value="Dragon"}
+                    },
+                    "Seleccione un Tipo",
+                    new { @class = "form-control" }
+                    )
+            </span>
+        </div>
+        <div class="form-group">
+            <span class="col-md-2">
+                Categoria:
+            </span>
+            <span class="col-md-6">
+                @Html.DropDownList("categoria", new List<SelectListItem>
+                    {
+                        new SelectListItem{Text="Semilla", Value="Semilla"},
+                        new SelectListItem{Text="Lagartija", Value="Lagartija"},
+                        new SelectListItem{Text="Tortuguita", Value="Tortuguita"},
+                        new SelectListItem{Text="Raton", Value="Raton"},
+                    },
+                    "Seleccione una Categoria",
+                    new { @class = "form-control" }
+                    )
+            </span>
+        </div>
+        <div class="form-group">
+            <span class="col-md-2">
+                Descripción:
+            </span>
+            <span class="col-md-6">
+                @Html.TextBox("descripcion", null, new { @class = "form-control", placeholder = "escribe una descripción" })
+            </span>
+        </div>
+        <div class="form-group">
+            <span class="col-md-2">
+                Altura:
+            </span>
+            <span class="col-md-6">
+                @Html.TextBox("altura", null, new { @class = "form-control", placeholder = "ingresa altura de tu pokémon" })
+            </span>
+        </div>
+        <div class="form-group">
+            <span class="col-md-2">
+                Peso:
+            </span>
+            <span class="col-md-6">
+                @Html.TextBox("peso", null, new { @class = "form-control", placeholder = "ingresa peso de tu pokémon" })
+            </span>
+        </div>
+        <div class="form-group">
+            <span class="col-md-2">
+                Sexo:
+            </span>
+            <span class="col-md-6">
+                @Html.DropDownList("sexo", new List<SelectListItem>
+                    {
+                        new SelectListItem{Text="Macho", Value="Macho"},
+                        new SelectListItem{Text="Hembra", Value="Hembra"}
+                    },
+                    "Seleccione un Sexo",
+                    new { @class = "form-control" }
+                    )
+            </span>
+        </div>
+        <div class="form-group">
+            <span class="col-md-2">
+                Ataques:
+            </span>
+            <span class="col-md-6">
+                @Html.TextBox("ataques", null, new { @class = "form-control", placeholder = "ingresa ataques de tu pokémon" })
+            </span>
+        </div>
+        <div class="form-group">
+            <span class="col-md-2">
+                Habilidad:
+            </span>
+            <span class="col-md-6">
+                @Html.TextBox("habilidad", null, new { @class = "form-control", placeholder = "ingresa alguna habilidad" })
+            </span>
+        </div>
+        <div class="form-group">
+            <span class="col-md-2">
+                Debilidad:
+            </span>
+            <span class="col-md-6">
+                @Html.TextBox("debilidad", null, new { @class = "form-control", placeholder = "ingresa alguna debilidad" })
+            </span>
+        </div>
+        <div class="form-group">
+            <span class="col-md-2">
+                Evoluciones:
+            </span>
+            <span class="col-md-6">
+                @Html.TextBox("evoluciones", null, new { @class = "form-control", placeholder = "ingresa evoluciones de tu pokémon" })
+            </span>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-success">Enviar formulario</button>
+        </div>
 
-<h2>Formulario</h2>
+    }
+
+</fieldset>
+
 
 

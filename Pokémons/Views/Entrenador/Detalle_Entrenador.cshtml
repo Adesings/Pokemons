@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Pokémons.Models.Entrenadores>
+
+<h2>Listado de Entrenadores</h2>
+
+<table class="table table-bordered table-hover table-responsive">
+    <thead>
+        <th>Identificador</th>
+        <th>Nombre</th>
+        <th>Edad</th>
+        <th>Pueblo</th>
+        <th>Medallas</th>
+        <th>Medallas Ganadas</th>
+        <th colspan="2">Action</th>
+    </thead>
+    <tbody>
+        @foreach (var e in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(m => e.Id_Entrenador)</td>
+                <td>@Html.DisplayFor(m => e.Nombre)</td>
+                <td>@Html.DisplayFor(m => e.Edad)</td>
+                <td>@Html.DisplayFor(m => e.Pueblo)</td>
+                <td>@Html.DisplayFor(m => e.Nom_Medallas)</td>
+                <td>@Html.DisplayFor(m => e.Num_Medallas)</td>
+                <td>@Html.ActionLink("Ver Ficha", "Ficha_Entrenador", new { Id_Entrenador = e.Id_Entrenador })</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

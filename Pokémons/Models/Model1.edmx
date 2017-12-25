@@ -4,12 +4,26 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Pokemons.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="PokemonsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Entrenadores">
+          <Key>
+            <PropertyRef Name="id_entrenador" />
+          </Key>
+          <Property Name="id_entrenador" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" />
+          <Property Name="edad" Type="int" />
+          <Property Name="pueblo" Type="varchar" MaxLength="50" />
+          <Property Name="pokemons" Type="varchar(max)" />
+          <Property Name="num_medallas" Type="int" />
+          <Property Name="nom_medallas" Type="varchar" MaxLength="50" />
+          <Property Name="id_pokemon" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Pokemon">
           <Key>
-            <PropertyRef Name="numero" />
+            <PropertyRef Name="id_pokemon" />
           </Key>
-          <Property Name="numero" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="id_pokemon" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="avatar" Type="image" />
           <Property Name="nombre" Type="varchar" MaxLength="25" />
           <Property Name="tipo" Type="varchar" MaxLength="25" />
           <Property Name="categoria" Type="varchar" MaxLength="20" />
@@ -22,19 +36,51 @@
           <Property Name="debilidad" Type="varchar" MaxLength="25" />
           <Property Name="evoluciones" Type="varchar" MaxLength="25" />
         </EntityType>
-        <EntityContainer Name="PokemonsStoreContainer">
+        <Association Name="FK_Entrenadores_Pokemon">
+          <End Role="Pokemon" Type="Self.Pokemon" Multiplicity="1" />
+          <End Role="Entrenadores" Type="Self.Entrenadores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pokemon">
+              <PropertyRef Name="id_pokemon" />
+            </Principal>
+            <Dependent Role="Entrenadores">
+              <PropertyRef Name="id_pokemon" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PokemonsModelStoreContainer">
+          <EntitySet Name="Entrenadores" EntityType="Self.Entrenadores" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pokemon" EntityType="Self.Pokemon" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Entrenadores_Pokemon" Association="Self.FK_Entrenadores_Pokemon">
+            <End Role="Pokemon" EntitySet="Pokemon" />
+            <End Role="Entrenadores" EntitySet="Entrenadores" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="Pokemons" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="PokemonsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Entrenadores">
+          <Key>
+            <PropertyRef Name="id_entrenador" />
+          </Key>
+          <Property Name="id_entrenador" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="edad" Type="Int32" />
+          <Property Name="pueblo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pokemons" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="num_medallas" Type="Int32" />
+          <Property Name="nom_medallas" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="id_pokemon" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Pokemon" Relationship="Self.FK_Entrenadores_Pokemon" FromRole="Entrenadores" ToRole="Pokemon" />
+        </EntityType>
         <EntityType Name="Pokemon">
           <Key>
-            <PropertyRef Name="numero" />
+            <PropertyRef Name="id_pokemon" />
           </Key>
-          <Property Name="numero" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="id_pokemon" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="avatar" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="nombre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="tipo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="categoria" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
@@ -46,20 +92,53 @@
           <Property Name="habilidad" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="debilidad" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="evoluciones" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Entrenadores" Relationship="Self.FK_Entrenadores_Pokemon" FromRole="Pokemon" ToRole="Entrenadores" />
         </EntityType>
-        <EntityContainer Name="PokemonsEntities" annotation:LazyLoadingEnabled="true">
+        <Association Name="FK_Entrenadores_Pokemon">
+          <End Role="Pokemon" Type="Self.Pokemon" Multiplicity="1" />
+          <End Role="Entrenadores" Type="Self.Entrenadores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pokemon">
+              <PropertyRef Name="id_pokemon" />
+            </Principal>
+            <Dependent Role="Entrenadores">
+              <PropertyRef Name="id_pokemon" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PokemonsEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Entrenadores" EntityType="Self.Entrenadores" />
           <EntitySet Name="Pokemon" EntityType="Self.Pokemon" />
+          <AssociationSet Name="FK_Entrenadores_Pokemon" Association="Self.FK_Entrenadores_Pokemon">
+            <End Role="Pokemon" EntitySet="Pokemon" />
+            <End Role="Entrenadores" EntitySet="Entrenadores" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="PokemonsStoreContainer" CdmEntityContainer="PokemonsEntities">
+        <EntityContainerMapping StorageEntityContainer="PokemonsModelStoreContainer" CdmEntityContainer="PokemonsEntities2">
+          <EntitySetMapping Name="Entrenadores">
+            <EntityTypeMapping TypeName="PokemonsModel.Entrenadores">
+              <MappingFragment StoreEntitySet="Entrenadores">
+                <ScalarProperty Name="id_entrenador" ColumnName="id_entrenador" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="edad" ColumnName="edad" />
+                <ScalarProperty Name="pueblo" ColumnName="pueblo" />
+                <ScalarProperty Name="pokemons" ColumnName="pokemons" />
+                <ScalarProperty Name="num_medallas" ColumnName="num_medallas" />
+                <ScalarProperty Name="nom_medallas" ColumnName="nom_medallas" />
+                <ScalarProperty Name="id_pokemon" ColumnName="id_pokemon" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Pokemon">
-            <EntityTypeMapping TypeName="Pokemons.Pokemon">
+            <EntityTypeMapping TypeName="PokemonsModel.Pokemon">
               <MappingFragment StoreEntitySet="Pokemon">
-                <ScalarProperty Name="numero" ColumnName="numero" />
+                <ScalarProperty Name="id_pokemon" ColumnName="id_pokemon" />
+                <ScalarProperty Name="avatar" ColumnName="avatar" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
                 <ScalarProperty Name="tipo" ColumnName="tipo" />
                 <ScalarProperty Name="categoria" ColumnName="categoria" />

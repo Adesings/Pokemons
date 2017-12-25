@@ -1,10 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="Pokemons" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+<Schema Namespace="PokemonsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Entrenadores">
+    <Key>
+      <PropertyRef Name="id_entrenador" />
+    </Key>
+    <Property Name="id_entrenador" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="edad" Type="Int32" />
+    <Property Name="pueblo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="pokemons" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="num_medallas" Type="Int32" />
+    <Property Name="nom_medallas" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="id_pokemon" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Pokemon" Relationship="Self.FK_Entrenadores_Pokemon" FromRole="Entrenadores" ToRole="Pokemon" />
+  </EntityType>
   <EntityType Name="Pokemon">
     <Key>
-      <PropertyRef Name="numero" />
+      <PropertyRef Name="id_pokemon" />
     </Key>
-    <Property Name="numero" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="id_pokemon" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="avatar" Type="Binary" MaxLength="Max" FixedLength="false" />
     <Property Name="nombre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
     <Property Name="tipo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
     <Property Name="categoria" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
@@ -16,8 +31,26 @@
     <Property Name="habilidad" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
     <Property Name="debilidad" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
     <Property Name="evoluciones" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Entrenadores" Relationship="Self.FK_Entrenadores_Pokemon" FromRole="Pokemon" ToRole="Entrenadores" />
   </EntityType>
-  <EntityContainer Name="PokemonsEntities" annotation:LazyLoadingEnabled="true">
+  <Association Name="FK_Entrenadores_Pokemon">
+    <End Role="Pokemon" Type="Self.Pokemon" Multiplicity="1" />
+    <End Role="Entrenadores" Type="Self.Entrenadores" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pokemon">
+        <PropertyRef Name="id_pokemon" />
+      </Principal>
+      <Dependent Role="Entrenadores">
+        <PropertyRef Name="id_pokemon" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="PokemonsEntities2" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Entrenadores" EntityType="Self.Entrenadores" />
     <EntitySet Name="Pokemon" EntityType="Self.Pokemon" />
+    <AssociationSet Name="FK_Entrenadores_Pokemon" Association="Self.FK_Entrenadores_Pokemon">
+      <End Role="Pokemon" EntitySet="Pokemon" />
+      <End Role="Entrenadores" EntitySet="Entrenadores" />
+    </AssociationSet>
   </EntityContainer>
 </Schema>

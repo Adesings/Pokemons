@@ -9,11 +9,11 @@ namespace Pokémons.Controllers
 {
     public class HomeController : Controller
     {
-        PokemonsEntities cnx;
+        PokemonsEntities2 cnx;
 
         public HomeController()
         {
-            cnx = new PokemonsEntities();
+            cnx = new PokemonsEntities2();
         }
 
         public ActionResult Index()
@@ -23,27 +23,26 @@ namespace Pokémons.Controllers
 
         public ActionResult Formulario()
         {
-            List<Pokemon> nuevo = cnx.Pokemon.ToList();
 
             return View();
         }
 
-        public ActionResult Guardar(string numero, string nombre, string tipo, string categoria, string descripcion, string altura, string peso, string sexo, string ataques, string habilidad, string debilidad, string evoluciones)
+        public ActionResult Guardar( int id_pokemon, string nombre, string tipo, string categoria, string descripcion, string altura, string peso, string sexo, string ataques, string habilidad, string debilidad, string evoluciones) 
         {
             Pokemon nuevo = new Pokemon()
             {
-                numero = numero,
-                nombre = nombre,
-                tipo = tipo,
-                categoria = categoria,
-                descripcion = descripcion,
-                altura = altura,
-                peso = peso,
-                sexo = sexo,
-                ataques = ataques,
-                habilidad = habilidad,
-                debilidad = debilidad,
-                evoluciones = evoluciones
+                Id_Pokemon = id_pokemon,
+                Nombre = nombre,
+                Tipo = tipo,
+                Categoria = categoria,
+                Descripcion = descripcion,
+                Altura = altura,
+                Peso = peso,
+                Sexo = sexo,
+                Ataques = ataques,
+                Habilidad = habilidad,
+                Debilidad = debilidad,
+                Evoluciones = evoluciones
             };
             cnx.Pokemon.Add(nuevo);
             cnx.SaveChanges();
@@ -52,19 +51,14 @@ namespace Pokémons.Controllers
         }
 
         public ActionResult Listado()
-        {
-            cnx.Database.Connection.Open();
-
-            List<Pokemon> nuevo = cnx.Pokemon.ToList();
-            cnx.Database.Connection.Close();
-
-            return View();
+        { 
+            return View(cnx.Pokemon.ToList());
         }
 
-        public ActionResult Ficha(string numero)
+        public ActionResult Ficha(int id_pokemon)
         {
             
-            return View(cnx.Pokemon.Where(x => x.numero.Equals(numero)).First());
+            return View(cnx.Pokemon.Where(x => x.Id_Pokemon == id_pokemon).First());
         }
     }
 }

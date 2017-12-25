@@ -25,19 +25,19 @@
         @foreach (Pokémons.Models.Pokemon p in Model)
         {
             <tr>
-                <td>@Html.DisplayFor(m => p.numero)</td>
-                <td>@Html.DisplayFor(m => p.nombre)</td>
-                <td>@Html.DisplayFor(m => p.tipo)</td>
-                <td>@Html.DisplayFor(m => p.categoria)</td>
-                <td>@Html.DisplayFor(m => p.descripcion)</td>
-                <td>@Html.DisplayFor(m => p.altura)</td>
-                <td>@Html.DisplayFor(m => p.peso)</td>
-                <td>@Html.DisplayFor(m => p.sexo)</td>
-                <td>@Html.DisplayFor(m => p.ataques)</td>
-                <td>@Html.DisplayFor(m => p.habilidad)</td>
-                <td>@Html.DisplayFor(m => p.debilidad)</td>
-                <td>@Html.DisplayFor(m => p.evoluciones)</td>
-                <td>@Html.ActionLink("Ver Ficha", "Ficha", new { numero = p.numero })</td>
+                <td>@Html.DisplayFor(m => p.Id_Pokemon)</td>
+                <td>@Html.DisplayFor(m => p.Nombre)</td>
+                <td>@Html.DisplayFor(m => p.Tipo)</td>
+                <td>@Html.DisplayFor(m => p.Categoria)</td>
+                <td>@Html.DisplayFor(m => p.Descripcion)</td>
+                <td>@Html.DisplayFor(m => p.Altura)</td>
+                <td>@Html.DisplayFor(m => p.Peso)</td>
+                <td>@Html.DisplayFor(m => p.Sexo)</td>
+                <td>@Html.DisplayFor(m => p.Ataques)</td>
+                <td>@Html.DisplayFor(m => p.Habilidad)</td>
+                <td>@Html.DisplayFor(m => p.Debilidad)</td>
+                <td>@Html.DisplayFor(m => p.Evoluciones)</td>
+                <td>@Html.ActionLink("Ver Ficha", "Ficha", new { Id_Pokemon = p.Id_Pokemon })</td>
             </tr>
         }
     </tbody>

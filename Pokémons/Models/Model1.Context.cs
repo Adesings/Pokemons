@@ -13,10 +13,10 @@ namespace Pokémons.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class PokemonsEntities : DbContext
+    public partial class PokemonsEntities2 : DbContext
     {
-        public PokemonsEntities()
-            : base("name=PokemonsEntities")
+        public PokemonsEntities2()
+            : base("name=PokemonsEntities2")
         {
         }
     
@@ -25,6 +25,7 @@ namespace Pokémons.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Entrenadores> Entrenadores { get; set; }
         public virtual DbSet<Pokemon> Pokemon { get; set; }
     }
 }

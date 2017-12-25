@@ -1,10 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="PokemonsStoreContainer" CdmEntityContainer="PokemonsEntities">
+  <EntityContainerMapping StorageEntityContainer="PokemonsModelStoreContainer" CdmEntityContainer="PokemonsEntities2">
+    <EntitySetMapping Name="Entrenadores">
+      <EntityTypeMapping TypeName="PokemonsModel.Entrenadores">
+        <MappingFragment StoreEntitySet="Entrenadores">
+          <ScalarProperty Name="id_entrenador" ColumnName="id_entrenador" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="edad" ColumnName="edad" />
+          <ScalarProperty Name="pueblo" ColumnName="pueblo" />
+          <ScalarProperty Name="pokemons" ColumnName="pokemons" />
+          <ScalarProperty Name="num_medallas" ColumnName="num_medallas" />
+          <ScalarProperty Name="nom_medallas" ColumnName="nom_medallas" />
+          <ScalarProperty Name="id_pokemon" ColumnName="id_pokemon" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Pokemon">
-      <EntityTypeMapping TypeName="Pokemons.Pokemon">
+      <EntityTypeMapping TypeName="PokemonsModel.Pokemon">
         <MappingFragment StoreEntitySet="Pokemon">
-          <ScalarProperty Name="numero" ColumnName="numero" />
+          <ScalarProperty Name="id_pokemon" ColumnName="id_pokemon" />
+          <ScalarProperty Name="avatar" ColumnName="avatar" />
           <ScalarProperty Name="nombre" ColumnName="nombre" />
           <ScalarProperty Name="tipo" ColumnName="tipo" />
           <ScalarProperty Name="categoria" ColumnName="categoria" />

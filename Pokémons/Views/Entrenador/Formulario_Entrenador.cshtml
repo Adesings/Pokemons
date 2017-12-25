@@ -1,0 +1,64 @@
+﻿
+
+<fieldset>
+    <legend> Mantenedor de Entrenador</legend>
+    @using (@Html.BeginForm("Guardar", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+        <div class="form-group">
+            <span class="col-md-2">
+                Identifacion:
+            </span>
+            <span class="col-md-6">
+                @Html.TextBox("id_entrenador", null, new { @class = "form-control", placeholder = "" })
+            </span>
+        </div>
+        <div class="form-group">
+            <span class="col-md-2">
+                Nombre Entrenador:
+            </span>
+            <span class="col-md-6">
+                @Html.TextBox("nombre", null, new { @class = "form-control", placeholder = "ingresa tu nombre" })
+            </span>
+        </div>
+        <div class="form-group">
+            <span class="col-md-2">
+                Edad:
+            </span>
+            <span class="col-md-6">
+                @Html.TextBox("edad", null, new { @class = "form-control", placeholder = "ingresa tu edad" })
+            </span>
+        </div>
+        <div class="form-group">
+            <span class="col-md-2">
+                Pueblo:
+            </span>
+            <span class="col-md-6">
+                @Html.TextBox("pueblo", null, new { @class = "form-control", placeholder = "ingresa tu pueblo" })
+            </span>
+        </div>
+        <div class="form-group">
+            <span class="col-md-2">
+                Cantidad de Medallas:
+            </span>
+            <span class="col-md-6">
+                @Html.TextBox("num_medallas", null, new { @class = "form-control", placeholder = "ingresa tus medallas ganadas" })
+            </span>
+        </div>
+        <div class="form-group">
+            <span class="col-md-2">
+                Nombre de Medallas:
+            </span>
+            <span class="col-md-6">
+                @Html.TextBox("nom_medallas", null, new { @class = "form-control", placeholder = "ingresa nombre de las medallas" })
+            </span>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-success">Enviar</button>
+        </div>
+    }
+
+</fieldset>
+
+
+
+
